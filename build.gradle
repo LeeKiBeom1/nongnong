@@ -29,6 +29,20 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+    //모델매퍼를 사용
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.0.0'
+
+    //MyBatis
+    implementation 'org.mybatis:mybatis:3.5.9'
+    implementation 'org.mybatis:mybatis-spring:2.0.7'
+
+    //DTO 검증을 위해 validate관련 lib
+    implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.2.1.Final'
+
+
+
 }
 
 tasks.named('test') {
