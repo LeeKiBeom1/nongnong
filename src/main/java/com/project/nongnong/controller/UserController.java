@@ -22,7 +22,6 @@ public class UserController {
         // Model 이 Json 타입의 데이터를 담는 곳인지?
         // 서비스 쪽으로 보낸다
 
-
         return "join OK!";
     }
 
