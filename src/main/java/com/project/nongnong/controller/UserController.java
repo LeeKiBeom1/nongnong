@@ -3,7 +3,6 @@ package com.project.nongnong.controller;
 //
 
 import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +20,10 @@ public class UserController {
         // /main/join 경로에 post방식으로 json데이터를 받고 응답한다 (회원가입 성공)
         // Model 이 Json 타입의 데이터를 담는 곳인지?
         // 서비스 쪽으로 보낸다
+        // 오토와이어 써서 서비스객체 불러오기
+
+        // UserEntity userEntity =
+
 
         return "join OK!";
     }

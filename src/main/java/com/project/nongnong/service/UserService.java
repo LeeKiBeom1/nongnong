@@ -1,6 +1,8 @@
 package com.project.nongnong.service;
 
 
+import org.springframework.ui.Model;
+
 // UserService 인터페이스와 Impl 을 따로 두고 사용하는 이유?
 public interface UserService {
 
@@ -9,6 +11,6 @@ public interface UserService {
 // 구현하고자 하는 부분이 명확하면서 제한적으로 내용이 드러나는 장점이 있다.
 
     // 회원 등록 하기
-    public void joinUser();
+    public void joinUser(Model model);
 
 }

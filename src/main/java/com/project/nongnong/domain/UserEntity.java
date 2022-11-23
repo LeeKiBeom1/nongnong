@@ -1,4 +1,4 @@
-package com.project.nongnong.entity;
+package com.project.nongnong.domain;
 
 
 // 여기가 domain의 entity에 해당된다.

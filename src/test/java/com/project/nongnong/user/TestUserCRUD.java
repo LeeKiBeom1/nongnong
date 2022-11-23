@@ -1,12 +1,11 @@
 package com.project.nongnong.user;
 
-import com.project.nongnong.entity.UserEntity;
+import com.project.nongnong.domain.UserEntity;
 import com.project.nongnong.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Optional;
 import java.util.stream.IntStream;
 
 

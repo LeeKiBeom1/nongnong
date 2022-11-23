@@ -1,7 +1,7 @@
 package com.project.nongnong.repository;
 
 
-import com.project.nongnong.entity.UserEntity;
+import com.project.nongnong.domain.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {

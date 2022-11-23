@@ -1,4 +1,4 @@
-package com.project.nongnong.entity;
+package com.project.nongnong.domain;
 
 
 import lombok.Getter;

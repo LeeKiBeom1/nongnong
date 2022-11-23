@@ -12,6 +12,5 @@ public class UserDTO {
     private String user_email;
     private String user_pwd;
     private String user_nickname;
-    private Long user_role;
 
 }
