@@ -1,30 +1,136 @@
 package com.project.nongnong.controller;
 
 
-import com.project.nongnong.service.BoardService;
+import com.project.nongnong.domain.BoardEntity;
+import com.project.nongnong.dto.BoardDTO;
+import com.project.nongnong.exception.BoardException;
+import com.project.nongnong.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/board")
 @Log4j2
-@RequiredArgsConstructor
+@RequiredArgsConstructor // repository주입을 위해 사용
 public class BoardController {
 
-    private final BoardService boardService;
 
-    @GetMapping("/list")
-    public Model list(Model model) {
+    // 레포지토리 주입받기
+    private final BoardRepository boardRepository;
 
-        // model.addAttribute()
+    // 값을 빌더와 리스트를 이용해 여러개의 값을 담아 전달
+    // 게시물 리스트 출력하기
+    @GetMapping("/board")
+    public List<BoardDTO> boardDTOList() {
 
+        List<BoardDTO> boardDTOList = new ArrayList<>();
 
-        return model;
+        boardDTOList.add(BoardDTO.builder()
+                        .board_title("title")
+                        .board_content("content")
+                        .board_map("map")
+                        .board_views(100)
+                        .user_key(1L)
+                        .build());
+
+        boardDTOList.add(BoardDTO.builder()
+                        .board_title("title2")
+                        .board_content("content2")
+                        .board_map("map2")
+                        .board_views(200)
+                        .user_key(2L)
+                        .build());
+
+        return boardDTOList;
+
     }
+
+    // 게시글 작성하기
+    @PostMapping("/api/board")
+    public BoardEntity writeBoard(@RequestBody BoardDTO boardDTO) {
+        BoardEntity boardEntity = BoardEntity.builder()
+                .board_title(boardDTO.getBoard_title())
+                .board_content(boardDTO.getBoard_content())
+                .board_map(boardDTO.getBoard_map())
+                .user_key(boardDTO.getUser_key())
+                .board_views(0)
+                .build();
+
+        boardRepository.save(boardEntity);
+
+        log.info("게시글 저장 완료");
+
+        return boardEntity;
+
+    }
+
+    // 게시글 상세 내용 보기
+    @GetMapping("api/board/{id}")
+    public BoardEntity boardEntity(@PathVariable Long id) {
+        // .findById()는 반환타입이 Optional이다, 즉 null을 반환할 수도 있다
+        // 그렇기에 Notice를 Optional로 감싸준다
+        Optional<BoardEntity> boardEntity = boardRepository.findById(id);
+        if (boardEntity.isPresent()) {
+            return boardEntity.get();
+        }
+        return null;
+    }
+
+    @ExceptionHandler(BoardException.class)
+    public ResponseEntity<String> handlerNotFoundException(BoardException exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    // 같은 API주소지만 body에 데이터가 담겨있으면 PutMapping 을 통해 데이터를 수정할 수 있다.
+    @PutMapping("/api/board/{id}")
+    public void updateBoard(@PathVariable Long id, @RequestBody BoardDTO boardDTO) {
+        Optional<BoardEntity> boardEntity = boardRepository.findById(id);
+
+        // if문을 사용하여 예외시 처리를 별도로 하고 코드실행
+        if (!boardEntity.isPresent()) {
+            // 예외발생시
+            throw new BoardException("게시글이 존재하지 않습니다.");
+        } else {
+            boardEntity.get().setBoard_title(boardDTO.getBoard_title());
+            boardEntity.get().setBoard_content(boardDTO.getBoard_content());
+            boardEntity.get().setBoard_map(boardDTO.getBoard_map());
+            boardRepository.save(boardEntity.get());
+            log.info("게시글 수정 완료");
+        }
+
+        // 이 경우 Optional이 아니기에 객체를 바로 받아 사용가능하다
+
+        // BoardEntity boardEntity = boardRepository.findById(id)
+//             .orElseThrow(() -> new BoardException("공지사항의 글이 존재하지 않습니다."));
+
+//        boardEntity.get().setBoard_title(boardDTO.getBoard_title());
+//        boardEntity.get().setBoard_content(boardDTO.getBoard_content());
+//        boardEntity.get().setBoard_map(boardDTO.getBoard_map());
+//        boardRepository.save(boardEntity.get());
+//        log.info("게시글 수정 완료");
+
+
+    }
+
+    // 조회수를 증가시키는 PatchMapping
+    @PatchMapping("/api/board/{id}/views")
+    public void boardViews(@PathVariable Long id) {
+        BoardEntity boardEntity = boardRepository.findById(id)
+                // 아이디를 찾음과 동시에 예외상황 발생할경우 예외처리 클래스를 생성하면서 오류메세지를 출력하고 있다.
+                .orElseThrow(() -> new BoardException("게시글이 존재하지 않습니다."));
+
+        boardEntity.setBoard_views(boardEntity.getBoard_views() + 1);
+
+        boardRepository.save(boardEntity);
+
+    }
+
 
 
 

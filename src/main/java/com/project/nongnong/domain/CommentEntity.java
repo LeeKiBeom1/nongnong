@@ -1,4 +1,4 @@
 package com.project.nongnong.domain;
 
-public class CommentVO {
+public class CommentEntity {
 }

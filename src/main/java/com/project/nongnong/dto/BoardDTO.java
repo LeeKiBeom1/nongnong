@@ -14,15 +14,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class BoardDTO {
 
-    private Long board_key;
-
+    private String board_title;
     private String board_content;
     private String board_map;
     private int board_views;
     private Long user_key;
 
-    private LocalDateTime regDate;
-
-    private LocalDateTime modDate;
 
 }
