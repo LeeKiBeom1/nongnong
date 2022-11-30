@@ -56,6 +56,7 @@ public class BoardController {
         boardRepository.save(boardEntity);
         log.info("게시글 저장 완료");
         return "게시글 저장 완료";
+        // 게시글
 
     }
 
