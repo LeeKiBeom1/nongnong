@@ -3,11 +3,12 @@ package com.project.nongnong.domain;
 
 // 여기가 domain의 entity에 해당된다.
 import lombok.*;
+import org.apache.ibatis.annotations.One;
 
 import javax.persistence.*;
 
-@Entity(name = "nongnong_user")
-@Getter
+@Entity(name = "NongnongUser")
+@Data
 @ToString
 @Builder
 @NoArgsConstructor
@@ -18,17 +19,18 @@ public class UserEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // IDENTITY : 데이터베이스에 위임한다.
-    private Long user_key;
+    private Long UserKey;
     @Column(length = 100, nullable = false)
-    private String user_email;
+    private String UserEmail;
     @Column(length = 100, nullable = false)
-    private String user_pwd;
+    private String UserPwd;
     @Column(length = 100, nullable = false)
-    private String user_nickname;
+    private String UserNickname;
 
-    public void change(String user_pwd, String user_nickname) {
-        this.user_pwd = user_pwd;
-        this.user_nickname = user_nickname;
+
+    public void change(String UserPwd, String UserNickname) {
+        this.UserPwd = UserPwd;
+        this.UserNickname = UserNickname;
     }
 
 

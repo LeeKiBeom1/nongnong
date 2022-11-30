@@ -8,9 +8,9 @@ import lombok.ToString;
 @ToString
 public class UserDTO {
 
-    private Long user_key;
-    private String user_email;
-    private String user_pwd;
-    private String user_nickname;
+    private Long UserKey;
+    private String UserEmail;
+    private String UserPwd;
+    private String UserNickname;
 
 }

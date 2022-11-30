@@ -18,11 +18,11 @@ public class TestUserCRUD {
 
     @Test
     public void insertTest() throws Exception {
-        IntStream.rangeClosed(1,3).forEach(i -> {
+        IntStream.rangeClosed(1,10).forEach(i -> {
             UserEntity userEntity = UserEntity.builder()
-                    .user_email("testEmail" + i)
-                    .user_pwd("testPwd" + i)
-                    .user_nickname("testNickname" + i)
+                    .UserEmail("testEmail" + i)
+                    .UserPwd("testPwd" + i)
+                    .UserNickname("testNickname" + i)
                     .build();
             userRepository.save(userEntity);
         });

@@ -3,7 +3,9 @@ package com.project.nongnong.repository;
 
 import com.project.nongnong.domain.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     // 상속만 받으면 모든작업이 끝난다.

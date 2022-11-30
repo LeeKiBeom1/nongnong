@@ -59,6 +59,9 @@ dependencies {
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
 
+    // spring 시큐리티
+    // implementation 'org.springframework.boot:spring-boot-starter-security'
+
 }
 
 tasks.named('test') {

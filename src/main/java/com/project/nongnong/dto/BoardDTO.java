@@ -1,12 +1,13 @@
 package com.project.nongnong.dto;
 
 
+import com.project.nongnong.domain.BoardEntity;
+import com.project.nongnong.domain.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -14,11 +15,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class BoardDTO {
 
-    private String board_title;
-    private String board_content;
-    private String board_map;
-    private int board_views;
-    private Long user_key;
+    private String BoardTitle;
+    private String BoardContent;
+    private String BoardMap;
+    private Long UserKey;
 
 
 }

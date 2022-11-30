@@ -37,4 +37,7 @@ public class RootConfig {
         return new JPAQueryFactory(entityManager);
     }
 
+
+
+
 }

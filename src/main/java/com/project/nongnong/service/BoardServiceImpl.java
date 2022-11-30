@@ -25,14 +25,14 @@ public class BoardServiceImpl implements BoardService {
     public Long register(BoardDTO boardDTO) {
 
         BoardEntity boardEntity = modelMapper.map(boardDTO, BoardEntity.class);
-        Long board_key = boardRepository.save(boardEntity).getBoard_key();
+        Long boardkey = boardRepository.save(boardEntity).getBoardKey();
 
-        return board_key;
+        return boardkey;
     }
 
     @Override
-    public BoardDTO readOnly(Long board_key) {
-        Optional<BoardEntity> result = boardRepository.findById(board_key);
+    public BoardDTO readOnly(Long boardkey) {
+        Optional<BoardEntity> result = boardRepository.findById(boardkey);
 
         BoardEntity boardEntity = result.orElseThrow();
 
@@ -47,7 +47,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void remove(Long board_key) {
+    public void remove(Long boardkey) {
 
     }
 }
