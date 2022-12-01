@@ -9,6 +9,11 @@ import com.project.nongnong.repository.BoardRepository;
 import com.project.nongnong.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -39,13 +44,13 @@ public class BoardService {
     }
 
     @Transactional
-    public List<BoardPageResponseDTO> list() {
+    public Page<BoardEntity> list(Pageable pageable) {
 
-        List<BoardPageResponseDTO> list = null;
+        //Pageable pageable = PageRequest.of(0,28, Sort.by(Sort.Direction.DESC, "boardkey"));
 
+        Page<BoardEntity> boardEntities = boardRepository.findAll(pageable);
 
-
-        return list;
+        return boardEntities;
     }
 
 

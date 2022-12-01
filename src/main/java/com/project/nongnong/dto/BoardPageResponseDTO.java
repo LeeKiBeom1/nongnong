@@ -1,6 +1,7 @@
 package com.project.nongnong.dto;
 
 
+import com.project.nongnong.domain.BoardEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -9,31 +10,22 @@ import java.util.List;
 
 @Getter
 @ToString
-public class BoardPageResponseDTO<E> {
+public class BoardPageResponseDTO {
 
-    private int page;
-    private int size;
-    private int total;
-    private int start;
-    private int end;
+    private Long boardkey;
+    private String boardtitle;
+    private String boardcontent;
+    private String boardmap;
+    private int boardviews;
+    private Long userkey;
+    private String usernickname;
 
-    private boolean prev;
-    private boolean next;
+    @Builder
+    public BoardPageResponseDTO(BoardEntity boardEntity) {
 
-    private List<E> dtoList;
+        //this.boardkey
 
-//    @Builder(builderMethodName = "withAll")
-//    public BoardPageResponseDTO(BoardPageRequestDTO boardPageRequestDTO, List<E> dtoList, int total) {
-//
-//        if (total <= 0) {
-//
-//            return;
-//
-//        }
-//
-//        this.page = boardPageRequestDTO.getPage();
-//        this.size = boardPageRequestDTO.getSize();
-//
-//    }
+    }
+
 
 }
