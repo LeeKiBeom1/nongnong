@@ -20,9 +20,9 @@ public class TestUserCRUD {
     public void insertTest() throws Exception {
         IntStream.rangeClosed(1,10).forEach(i -> {
             UserEntity userEntity = UserEntity.builder()
-                    .UserEmail("testEmail" + i)
-                    .UserPwd("testPwd" + i)
-                    .UserNickname("testNickname" + i)
+                    .useremail("testEmail" + i)
+                    .userpwd("testPwd" + i)
+                    .usernickname("testNickname" + i)
                     .build();
             userRepository.save(userEntity);
         });

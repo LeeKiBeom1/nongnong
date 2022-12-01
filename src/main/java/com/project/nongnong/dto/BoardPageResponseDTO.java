@@ -22,18 +22,18 @@ public class BoardPageResponseDTO<E> {
 
     private List<E> dtoList;
 
-    @Builder(builderMethodName = "withAll")
-    public BoardPageResponseDTO(BoardPageRequestDTO boardPageRequestDTO, List<E> dtoList, int total) {
-
-        if (total <= 0) {
-
-            return;
-
-        }
-
-        this.page = boardPageRequestDTO.getPage();
-        this.size = boardPageRequestDTO.getSize();
-
-    }
+//    @Builder(builderMethodName = "withAll")
+//    public BoardPageResponseDTO(BoardPageRequestDTO boardPageRequestDTO, List<E> dtoList, int total) {
+//
+//        if (total <= 0) {
+//
+//            return;
+//
+//        }
+//
+//        this.page = boardPageRequestDTO.getPage();
+//        this.size = boardPageRequestDTO.getSize();
+//
+//    }
 
 }

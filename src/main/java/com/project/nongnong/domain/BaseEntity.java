@@ -20,13 +20,12 @@ public abstract class BaseEntity {
 
     // Entity 가 생성되어 저장될 때 시간이 자동 저장됩니다.
     @CreatedDate
-    @Column
-    private LocalDateTime CreatedDate;
+    @Column(updatable = false)
+    private LocalDateTime createdDate;
 
     // 조회한 Entity 값을 변경할 때 시간이 자동 저장됩니다.
     @LastModifiedDate
-    @Column
-    private LocalDateTime ModifiedDate;
+    private LocalDateTime modifiedDate;
 
 
 }

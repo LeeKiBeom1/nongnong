@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-@EnableJpaAuditing  // jpa를 사용하기위해 추가한 어노테이션 b01참고
+@EnableJpaAuditing  // BaseEntity의 Auditing 활성화를위해 @EnableJpaAuditing 추가함
 @SpringBootApplication
 public class NongnongApplication {
 

@@ -3,22 +3,37 @@ package com.project.nongnong.dto;
 
 import com.project.nongnong.domain.BoardEntity;
 import com.project.nongnong.domain.UserEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.project.nongnong.repository.UserRepository;
+import lombok.*;
 
 
-@Data
-@Builder
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
 public class BoardDTO {
 
-    private String BoardTitle;
-    private String BoardContent;
-    private String BoardMap;
-    private Long UserKey;
+    private String boardtitle;
+    private String boardcontent;
+    private String boardmap;
+    private Long userkey;
+
+
+    @Builder
+    public BoardDTO(String boardtitle, String boardcontent, String boardmap, Long userkey) {
+        this.boardtitle = boardtitle;
+        this.boardcontent = boardcontent;
+        this.boardmap = boardmap;
+        this.userkey = userkey;
+    }
+
+    public BoardEntity toEntity() {
+
+        return BoardEntity.builder()
+                .boardtitle(boardtitle)
+                .boardcontent(boardcontent)
+                .boardmap(boardmap)
+                .build();
+    }
+
 
 
 }
