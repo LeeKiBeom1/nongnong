@@ -47,7 +47,7 @@ public class BoardController {
     // 값을 빌더와 리스트를 이용해 여러개의 값을 담아 전달
     // 게시물 리스트 출력하기
     @GetMapping("/api/board/list")
-    public Page<BoardEntity> boardList(Pageable pageable) throws Exception {
+    public List<BoardPageResponseDTO> boardList(Pageable pageable) throws Exception {
 
         // List<BoardEntity> boardEntityListBy = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "boardkey"));
         return boardService.list(pageable);

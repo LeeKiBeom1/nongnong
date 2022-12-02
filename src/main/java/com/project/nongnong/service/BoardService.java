@@ -9,6 +9,8 @@ import com.project.nongnong.repository.BoardRepository;
 import com.project.nongnong.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.Converter;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -44,13 +47,20 @@ public class BoardService {
     }
 
     @Transactional
-    public Page<BoardEntity> list(Pageable pageable) {
+    public List<BoardPageResponseDTO> list(Pageable pageable) {
 
-        //Pageable pageable = PageRequest.of(0,28, Sort.by(Sort.Direction.DESC, "boardkey"));
+        ModelMapper modelMapper = new ModelMapper();
+
+
 
         Page<BoardEntity> boardEntities = boardRepository.findAll(pageable);
 
-        return boardEntities;
+        List<BoardPageResponseDTO> boardPageResponseDTO = boardEntities.stream().map(nongnongboard -> modelMapper.map(nongnongboard,
+                BoardPageResponseDTO.class)).collect(Collectors.toList());
+
+
+        return boardPageResponseDTO;
+
     }
 
 
