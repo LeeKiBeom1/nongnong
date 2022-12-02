@@ -1,7 +1,17 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.5'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+
+    // queryDsl 스프링부트 2.6 이상버전이라면 다음처럼 추가
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'com.project'
@@ -34,17 +44,42 @@ dependencies {
     //모델매퍼를 사용
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.0.0'
 
+    // test를 하기위한 롬복 설정
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
     //MyBatis
-    implementation 'org.mybatis:mybatis:3.5.9'
-    implementation 'org.mybatis:mybatis-spring:2.0.7'
+    // implementation 'org.mybatis:mybatis:3.5.9'
+    // implementation 'org.mybatis:mybatis-spring:2.0.7'
 
     //DTO 검증을 위해 validate관련 lib
     implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.2.1.Final'
 
+    // querydsl dependencies
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
 
+    // spring 시큐리티
+    // implementation 'org.springframework.boot:spring-boot-starter-security'
 
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// script for querydsl
+def querydslDir = "$buildDir/generated/querydsl" // 쿼리DSL을 사용할 경로를 여기서 지정해줘야한다.
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main.java.srcDir querydslDir
+}
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
 }

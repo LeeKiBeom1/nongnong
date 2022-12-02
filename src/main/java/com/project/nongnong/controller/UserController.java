@@ -2,8 +2,13 @@ package com.project.nongnong.controller;
 
 //
 
+import com.project.nongnong.domain.UserEntity;
+import com.project.nongnong.dto.UserDTO;
+import com.project.nongnong.dto.UserResponseDTO;
+import com.project.nongnong.repository.UserRepository;
+import com.project.nongnong.service.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,41 +16,38 @@ import org.springframework.web.bind.annotation.*;
 // @RestController // controller 에 responsebody가 추가된 것 그냥 컨트롤러가 아닌 레스트컨트롤러의 주용도는 Json 형태로 객체 데이터를 반환한다. / 동작 과정은 @Controller 과 @ResponseBody 를 붙인것과 완벽히 동일하다.
 @RestController
 @Log4j2
-@RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 
-
-    @PostMapping("/join")
-    public String join(Model model) throws Exception {
-        // 회원 가입 요청
-        // /main/join 경로에 post방식으로 json데이터를 받고 응답한다 (회원가입 성공)
-        // Model 이 Json 타입의 데이터를 담는 곳인지?
-        // 서비스 쪽으로 보낸다
+    private final UserService userService;
 
 
-        return "join OK!";
+    @PostMapping("/api/user/join")
+    public Long save(@RequestBody UserDTO userDTO) throws Exception {
+
+        /*
+        사용자의 요청을 DTO로 받아서 회원 가입 서비스로 전달하기
+         */
+        return userService.save(userDTO);
+
     }
 
-    @PostMapping("/login")
-    public String login(Model model) {
+    @PostMapping("/api/user/login")
+    public Long login(@RequestBody UserDTO userDTO) {
         // 로그인 요청 받는부분
 
-        return "login OK!";
+
+        return userService.login(userDTO);
     }
 
-    @GetMapping("/myPage")
-    public Model myPage(Model model) {
+    @GetMapping("/api/user/page")
+    public UserResponseDTO myPage(@RequestBody UserDTO userDTO) {
 
+        UserResponseDTO userResponseDTO = null;
 
-        // DB에 처리 요청
-        // 서비스 패키지에 만든 클래스를 호출해서 데이터를 받아오는게 맞는지?
+        // 서비스로 보내고 키값을 받아 조회하고 결과값을 담고 리턴해줄것
 
-        // 결과값 받기
-        // 결과값이 모델에 담아진다
-        model.addAttribute("user", "list");
-        // 회원정보 리턴
-
-        return model;
+        return userResponseDTO;
         // 컨트롤러에서 우선 매핑한 url을 똑같은 구조로 resources의 templates에다 구조를 만들어줘야한다.
         // return 뒤에 오는 url은 html을 불러오겠다는 얘기고
         // @GetMapping과 클래스 처음에있는 @RequestMapping의 매핑은 합쳐서 /user/myPage 고 이는 내가 웹브라우저에 검색할때 적어야하는 url이다 라고 이해하면 된다.
@@ -55,8 +57,6 @@ public class UserController {
 
 
     }
-
-
 
 
     // 회원 가입, 탈퇴, 수정, 마이페이지에서 현재 회원정보 요청

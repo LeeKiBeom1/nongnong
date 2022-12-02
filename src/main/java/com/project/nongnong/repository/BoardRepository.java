@@ -1,4 +1,23 @@
 package com.project.nongnong.repository;
 
-public interface BoardRepository {
+import com.project.nongnong.domain.BoardEntity;
+import com.project.nongnong.domain.UserEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+
+@Repository
+public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
+
+    @Override
+    @EntityGraph(attributePaths = "userEntity", type = EntityGraph.EntityGraphType.LOAD)
+    List<BoardEntity> findAll();
+
 }
