@@ -42,6 +42,7 @@ public class BoardEntity extends BaseEntity {
         this.boardtitle = boardtitle;
         this.boardcontent = boardcontent;
         this.boardmap = boardmap;
+
     }
 /*
 이슈 01

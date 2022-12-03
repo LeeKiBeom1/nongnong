@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 
@@ -47,19 +44,22 @@ public class BoardService {
     }
 
     @Transactional
-    public List<BoardPageResponseDTO> list(Pageable pageable) {
+    public Page<BoardPageResponseDTO> list(Pageable pageable) {
 
-        ModelMapper modelMapper = new ModelMapper();
+        Page<BoardEntity> boardEntityList = boardRepository.findAll(pageable);
 
+        return null;
 
+    }
 
-        Page<BoardEntity> boardEntities = boardRepository.findAll(pageable);
+    @Transactional
+    public Page<BoardPageResponseDTO> list2(Pageable pageable) {
 
-        List<BoardPageResponseDTO> boardPageResponseDTO = boardEntities.stream().map(nongnongboard -> modelMapper.map(nongnongboard,
-                BoardPageResponseDTO.class)).collect(Collectors.toList());
+        Page<BoardEntity> boardEntityPage = boardRepository.findAll(pageable);
 
+        Page<BoardPageResponseDTO> boardPageResponseDTOPage = boardRepository.findAll(pageable).map(BoardPageResponseDTO::toDto);
 
-        return boardPageResponseDTO;
+        return boardPageResponseDTOPage;
 
     }
 
