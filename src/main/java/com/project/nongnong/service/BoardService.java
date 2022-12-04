@@ -9,18 +9,11 @@ import com.project.nongnong.repository.BoardRepository;
 import com.project.nongnong.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.modelmapper.Converter;
-import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -47,21 +40,27 @@ public class BoardService {
     }
 
     @Transactional
-    public List<BoardPageResponseDTO> list(Pageable pageable) {
+    public Page<BoardPageResponseDTO> list(Pageable pageable) {
 
-        ModelMapper modelMapper = new ModelMapper();
+        Page<BoardPageResponseDTO> boardPageResponseDTOPage = boardRepository.findAll(pageable).map(BoardPageResponseDTO::toDto);
 
-
-
-        Page<BoardEntity> boardEntities = boardRepository.findAll(pageable);
-
-        List<BoardPageResponseDTO> boardPageResponseDTO = boardEntities.stream().map(nongnongboard -> modelMapper.map(nongnongboard,
-                BoardPageResponseDTO.class)).collect(Collectors.toList());
-
-
-        return boardPageResponseDTO;
+        return boardPageResponseDTOPage;
 
     }
+
+
+    // 이미 상세내용을 리스트에서 전부 전달했는데 또 데이터를 보내줄 필요가 있을까? 불필요한 행위인듯
+//    @Transactional
+//    public Optional<BoardPageResponseDTO> view(Long id) {
+//
+//
+//        Optional<BoardPageResponseDTO> boardPageResponseDTO = boardRepository.findByBoardkey(id)
+//
+//        return boardPageResponseDTO;
+//    }
+
+
+
 
 
 }

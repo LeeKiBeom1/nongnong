@@ -2,6 +2,7 @@ package com.project.nongnong.domain;
 
 
 // 여기가 domain의 entity에 해당된다.
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.nongnong.dto.UserDTO;
 import lombok.*;
