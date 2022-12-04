@@ -9,15 +9,11 @@ import com.project.nongnong.repository.BoardRepository;
 import com.project.nongnong.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.modelmapper.Converter;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.*;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -46,22 +42,25 @@ public class BoardService {
     @Transactional
     public Page<BoardPageResponseDTO> list(Pageable pageable) {
 
-        Page<BoardEntity> boardEntityList = boardRepository.findAll(pageable);
-
-        return null;
-
-    }
-
-    @Transactional
-    public Page<BoardPageResponseDTO> list2(Pageable pageable) {
-
-        Page<BoardEntity> boardEntityPage = boardRepository.findAll(pageable);
-
         Page<BoardPageResponseDTO> boardPageResponseDTOPage = boardRepository.findAll(pageable).map(BoardPageResponseDTO::toDto);
 
         return boardPageResponseDTOPage;
 
     }
+
+
+    // 이미 상세내용을 리스트에서 전부 전달했는데 또 데이터를 보내줄 필요가 있을까? 불필요한 행위인듯
+//    @Transactional
+//    public Optional<BoardPageResponseDTO> view(Long id) {
+//
+//
+//        Optional<BoardPageResponseDTO> boardPageResponseDTO = boardRepository.findByBoardkey(id)
+//
+//        return boardPageResponseDTO;
+//    }
+
+
+
 
 
 }

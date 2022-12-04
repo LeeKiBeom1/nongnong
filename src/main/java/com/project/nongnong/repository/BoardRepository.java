@@ -27,4 +27,8 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
     Page<BoardEntity> findAll(Pageable pageable);
 
 
+    @EntityGraph(attributePaths = {"userEntity"})
+    BoardEntity findByBoardkey(Long id);
+
+
 }

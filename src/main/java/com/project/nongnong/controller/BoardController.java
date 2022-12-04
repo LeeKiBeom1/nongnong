@@ -53,26 +53,19 @@ public class BoardController {
         return boardService.list(pageable);
 
     }
-    @GetMapping("/api/board/list2")
-    public Page<BoardPageResponseDTO> boardList2(Pageable pageable) throws Exception {
-
-        // List<BoardEntity> boardEntityListBy = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "boardkey"));
-
-        return boardService.list2(pageable);
-
-    }
 
 
     // 게시글 상세 내용 보기
-    @GetMapping("/api/board/{id}")
-    public BoardEntity boardEntity(@PathVariable Long id) {
+    @GetMapping("/api/board/list/{id}")
+    public Optional<BoardEntity> boardEntity(@PathVariable Long id) {
         // .findById()는 반환타입이 Optional이다, 즉 null을 반환할 수도 있다
         // 그렇기에 BoardEntity 를 Optional로 감싸준다
         Optional<BoardEntity> boardEntity = boardRepository.findById(id);
         if (boardEntity.isPresent()) {
-            return boardEntity.get();
+            return boardRepository.findById(id);
+        } else {
+            throw new BoardException("게시글이 존재하지 않습니다.");
         }
-        return null;
     }
 
 
@@ -139,12 +132,15 @@ public class BoardController {
 
     }
 
-//    @DeleteMapping("/api/board/all")
-//    public void deleteBoardAll() {
-//        // List<BoardEntity> boardEntityList = boardRepository.findAll();
-//        // 데이터를 전부 삭제하는건 관리자만 가능하게 해야함.
-//        // 예제에선 게시글 데이터의 컬럼의 형태를 삭제여부? false -> true 이렇게 바꿨을뿐 실제 DB에선 삭제하지 않는다.
-//    }
+    @DeleteMapping("/api/board/delete")
+    public void deleteBoardAll() {
+        // List<BoardEntity> boardEntityList = boardRepository.findAll();
+        // 데이터를 전부 삭제하는건 관리자만 가능하게 해야함.
+        // 예제에선 게시글 데이터의 컬럼의 형태를 삭제여부? false -> true 이렇게 바꿨을뿐 실제 DB에선 삭제하지 않는다.
+
+        boardRepository.deleteAll();
+
+    }
 
 
 

@@ -1,5 +1,6 @@
 package com.project.nongnong.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.apache.catalina.User;
 import org.hibernate.annotations.ColumnDefault;
@@ -31,6 +32,7 @@ public class BoardEntity extends BaseEntity {
     // 게시글과 회원은  다대일(N : 1) 관계 지정
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userkey")
+    @JsonIgnore
     private UserEntity userEntity;
 
     // BaseEntity로 상속받은 컬럼은 여기에 적을 필요 없다.

@@ -29,7 +29,7 @@ public class BoardPageResponseDTO {
     private String usernickname;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-    private List<UserEntity> userEntityList;
+    // private List<UserEntity> userEntityList;
 
 
 
@@ -55,12 +55,14 @@ public class BoardPageResponseDTO {
                 .boardcontent(boardEntity.getBoardcontent())
                 .boardmap(boardEntity.getBoardmap())
                 .boardviews(boardEntity.getBoardviews())
-//                .userkey(boardEntity.getUserEntity().getUserkey())
-//                .usernickname(boardEntity.getUserEntity().getUsernickname())
+                .userkey(boardEntity.getUserEntity().getUserkey())
+                .usernickname(boardEntity.getUserEntity().getUsernickname())
                 .createdDate(boardEntity.getCreatedDate())
                 .modifiedDate(boardEntity.getModifiedDate())
                 .build();
 
     }
+
+
 
 }
