@@ -5,6 +5,7 @@ import com.project.nongnong.domain.BoardEntity;
 import com.project.nongnong.domain.UserEntity;
 import com.project.nongnong.dto.BoardDTO;
 import com.project.nongnong.dto.BoardPageResponseDTO;
+import com.project.nongnong.dto.BoardViewDTO;
 import com.project.nongnong.repository.BoardRepository;
 import com.project.nongnong.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -49,15 +51,15 @@ public class BoardService {
     }
 
 
-    // 이미 상세내용을 리스트에서 전부 전달했는데 또 데이터를 보내줄 필요가 있을까? 불필요한 행위인듯
-//    @Transactional
-//    public Optional<BoardPageResponseDTO> view(Long id) {
-//
-//
-//        Optional<BoardPageResponseDTO> boardPageResponseDTO = boardRepository.findByBoardkey(id)
-//
-//        return boardPageResponseDTO;
-//    }
+    @Transactional
+    public BoardPageResponseDTO view(Long id) {
+
+        BoardEntity boardEntity = boardRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        BoardPageResponseDTO boardViewDTO = BoardPageResponseDTO.toDto(boardEntity);
+
+        return boardViewDTO;
+
+    }
 
 
 
