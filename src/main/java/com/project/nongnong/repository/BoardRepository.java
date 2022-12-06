@@ -2,6 +2,7 @@ package com.project.nongnong.repository;
 
 import com.project.nongnong.domain.BoardEntity;
 import com.project.nongnong.domain.UserEntity;
+import com.project.nongnong.dto.BoardViewDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,8 +28,9 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
     Page<BoardEntity> findAll(Pageable pageable);
 
 
-    @EntityGraph(attributePaths = {"userEntity"})
-    BoardEntity findByBoardkey(Long id);
+//    @Override
+//    @EntityGraph(attributePaths = {"userEntity"})
+//    BoardEntity findById(Long id);
 
 
 }

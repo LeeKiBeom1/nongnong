@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.nongnong.dto.UserDTO;
 import lombok.*;
 import org.apache.ibatis.annotations.One;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ public class UserEntity extends BaseEntity {
     private String usernickname;
 
     @Column
+    @ColumnDefault("0")
     private Long userrole;
 
     @Builder

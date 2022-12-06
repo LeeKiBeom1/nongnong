@@ -5,6 +5,7 @@ import com.project.nongnong.domain.BoardEntity;
 import com.project.nongnong.domain.UserEntity;
 import com.project.nongnong.dto.BoardDTO;
 import com.project.nongnong.dto.BoardPageResponseDTO;
+import com.project.nongnong.dto.BoardViewDTO;
 import com.project.nongnong.dto.UserDTO;
 import com.project.nongnong.exception.BoardException;
 import com.project.nongnong.repository.BoardRepository;
@@ -33,6 +34,11 @@ public class BoardController {
     private final BoardRepository boardRepository;
     private final BoardService boardService;
 
+//    @GetMapping
+//    public String home() {
+//        return "Hello, JWT!";
+//    }
+
 
     // 게시글 작성하기
     @PostMapping("/api/board/write")
@@ -56,13 +62,14 @@ public class BoardController {
 
 
     // 게시글 상세 내용 보기
+    // 유저 키값, 유저 닉네임
     @GetMapping("/api/board/list/{id}")
-    public Optional<BoardEntity> boardEntity(@PathVariable Long id) {
+    public BoardPageResponseDTO boardViewDTO(@PathVariable Long id) {
         // .findById()는 반환타입이 Optional이다, 즉 null을 반환할 수도 있다
         // 그렇기에 BoardEntity 를 Optional로 감싸준다
         Optional<BoardEntity> boardEntity = boardRepository.findById(id);
         if (boardEntity.isPresent()) {
-            return boardRepository.findById(id);
+            return boardService.view(id);
         } else {
             throw new BoardException("게시글이 존재하지 않습니다.");
         }
