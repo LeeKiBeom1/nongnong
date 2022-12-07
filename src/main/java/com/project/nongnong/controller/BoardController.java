@@ -34,10 +34,7 @@ public class BoardController {
     private final BoardRepository boardRepository;
     private final BoardService boardService;
 
-//    @GetMapping
-//    public String home() {
-//        return "Hello, JWT!";
-//    }
+
 
 
     // 게시글 작성하기

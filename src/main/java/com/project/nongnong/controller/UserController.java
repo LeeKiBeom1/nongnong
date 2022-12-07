@@ -12,6 +12,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 
 // @RestController // controller 에 responsebody가 추가된 것 그냥 컨트롤러가 아닌 레스트컨트롤러의 주용도는 Json 형태로 객체 데이터를 반환한다. / 동작 과정은 @Controller 과 @ResponseBody 를 붙인것과 완벽히 동일하다.
 @RestController
@@ -20,6 +22,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
+
+    @GetMapping
+    public String home(Principal principal) {
+        return "Hello, " + principal.getName();
+    }
+
 
 
     @PostMapping("/api/user/join")
@@ -63,10 +72,12 @@ public class UserController {
     // 각 request 마다 하나씩 매핑해서 여기에 만들어 두면 되는건지?
     // mapper에는 어떤게 들어가야 하는건지
 
-    @GetMapping("/deleteUser")
+    @GetMapping("/api/user/delete")
     public String deleteUser() {
 
-        return "delete OK!";
+        userRepository.deleteAll();
+
+        return "모든 유저 삭제 완료";
     }
 
 
