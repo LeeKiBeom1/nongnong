@@ -26,6 +26,11 @@ public class BoardEntity extends BaseEntity {
     private String boardcontent;
     @Column(length = 500,nullable = false)
     private String boardmap;
+
+    //  adress adressdetail zonenumber
+    // 보드 맵 대신 세가지 추가 length 200
+
+
     @ColumnDefault("0")
     private int boardviews;
 

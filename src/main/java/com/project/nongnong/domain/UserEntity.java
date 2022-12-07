@@ -33,9 +33,8 @@ public class UserEntity extends BaseEntity {
     @Column(length = 100, nullable = false)
     private String usernickname;
 
-    @Column
     @ColumnDefault("0")
-    private Long userrole;
+    private int userrole;
 
     @Builder
     public UserEntity(String useremail, String userpwd, String usernickname) {
