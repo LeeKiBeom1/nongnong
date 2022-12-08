@@ -37,8 +37,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-
                 .csrf(csrf -> csrf.disable()) // (1)
+
                 .authorizeRequests( auth -> auth
                         .anyRequest().authenticated() // (2)
                 )
@@ -50,10 +50,10 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring()
-                .antMatchers(HttpMethod.GET, "/api/board/list")
-                .antMatchers(HttpMethod.POST, "/api/user/join");
+        return (web) -> web.ignoring().antMatchers("/api/board/list", "/api/user/join");
     }
+
+
 
     @Bean
     public InMemoryUserDetailsManager users() {
