@@ -137,12 +137,15 @@ public class BoardController {
     }
 
     @DeleteMapping("/api/board/delete")
-    public void deleteBoardAll() {
+    public String deleteBoardAll() {
         // List<BoardEntity> boardEntityList = boardRepository.findAll();
         // 데이터를 전부 삭제하는건 관리자만 가능하게 해야함.
         // 예제에선 게시글 데이터의 컬럼의 형태를 삭제여부? false -> true 이렇게 바꿨을뿐 실제 DB에선 삭제하지 않는다.
 
         boardRepository.deleteAll();
+        String result = "모든 게시글 삭제완료";
+        return result;
+
 
     }
 
