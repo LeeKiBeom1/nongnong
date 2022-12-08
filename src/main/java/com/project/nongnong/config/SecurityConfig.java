@@ -51,7 +51,8 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
-                .antMatchers(HttpMethod.GET, "/api/board/list");
+                .antMatchers(HttpMethod.GET, "/api/board/list")
+                .antMatchers(HttpMethod.POST, "/api/user/join");
     }
 
     @Bean
