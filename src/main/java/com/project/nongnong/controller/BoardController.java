@@ -91,7 +91,11 @@ public class BoardController {
         } else {
             boardEntity.get().setBoardtitle(boardDTO.getBoardtitle());
             boardEntity.get().setBoardcontent(boardDTO.getBoardcontent());
-            boardEntity.get().setBoardmap(boardDTO.getBoardmap());
+
+            boardEntity.get().setAddress(boardDTO.getAddress());
+            boardEntity.get().setAddressdetail(boardDTO.getAddressdetail());
+            boardEntity.get().setZonenumber(boardDTO.getZonenumber());
+
             boardRepository.save(boardEntity.get());
             log.info("게시글 수정 완료");
             result = "게시글 수정 완료";
