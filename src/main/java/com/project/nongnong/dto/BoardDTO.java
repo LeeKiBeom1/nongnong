@@ -13,16 +13,24 @@ public class BoardDTO {
 
     private String boardtitle;
     private String boardcontent;
-    private String boardmap;
     private Long userkey;
+
+    private String address;
+    private String addressdetail;
+    private String zonenumber;
+
+    // 맵지움
 
 
     @Builder
-    public BoardDTO(String boardtitle, String boardcontent, String boardmap, Long userkey) {
+    public BoardDTO(String boardtitle, String boardcontent, Long userkey, String address
+    , String addressdetail, String zonenumber) {
         this.boardtitle = boardtitle;
         this.boardcontent = boardcontent;
-        this.boardmap = boardmap;
         this.userkey = userkey;
+        this.address = address;
+        this.addressdetail = addressdetail;
+        this.zonenumber = zonenumber;
     }
 
     public BoardEntity toEntity() {
@@ -30,7 +38,9 @@ public class BoardDTO {
         return BoardEntity.builder()
                 .boardtitle(boardtitle)
                 .boardcontent(boardcontent)
-                .boardmap(boardmap)
+                .address(address)
+                .addressdetail(addressdetail)
+                .zonenumber(zonenumber)
                 .build();
     }
 

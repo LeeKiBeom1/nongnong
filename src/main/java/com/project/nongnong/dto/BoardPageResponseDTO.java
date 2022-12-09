@@ -23,10 +23,15 @@ public class BoardPageResponseDTO {
     private Long boardkey;
     private String boardtitle;
     private String boardcontent;
-    private String boardmap;
     private int boardviews;
     private Long userkey;
     private String usernickname;
+
+    private String address;
+    private String addressdetail;
+    private String zonenumber;
+
+
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
     // private List<UserEntity> userEntityList;
@@ -53,7 +58,11 @@ public class BoardPageResponseDTO {
                 .boardkey(boardEntity.getBoardkey())
                 .boardtitle(boardEntity.getBoardtitle())
                 .boardcontent(boardEntity.getBoardcontent())
-                .boardmap(boardEntity.getBoardmap())
+                // 맵 지움
+                .address(boardEntity.getAddress())
+                .addressdetail(boardEntity.getAddressdetail())
+                .zonenumber(boardEntity.getZonenumber())
+
                 .boardviews(boardEntity.getBoardviews())
                 .userkey(boardEntity.getUserEntity().getUserkey())
                 .usernickname(boardEntity.getUserEntity().getUsernickname())

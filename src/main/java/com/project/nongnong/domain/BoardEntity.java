@@ -24,11 +24,24 @@ public class BoardEntity extends BaseEntity {
     private String boardtitle;
     @Column(length = 2000,nullable = false)
     private String boardcontent;
-    @Column(length = 500,nullable = false)
-    private String boardmap;
+
+//    @Column(length = 500,nullable = false)
+//    private String boardmap;
 
     //  adress adressdetail zonenumber
     // 보드 맵 대신 세가지 추가 length 200
+
+    // 주소값
+    @Column(length = 200, nullable = false)
+    private String address;
+    // 상세주소
+    @Column(length = 200, nullable = false)
+    private String addressdetail;
+    // 우편번호
+    @Column(length = 200, nullable = false)
+    private String zonenumber;
+
+
 
 
     @ColumnDefault("0")
@@ -44,11 +57,13 @@ public class BoardEntity extends BaseEntity {
 
     // 생성자
     @Builder
-    public BoardEntity(UserEntity userEntity,String boardtitle, String boardcontent, String boardmap) {
+    public BoardEntity(UserEntity userEntity,String boardtitle, String boardcontent, String address, String addressdetail, String zonenumber) {
         this.userEntity = userEntity;
         this.boardtitle = boardtitle;
         this.boardcontent = boardcontent;
-        this.boardmap = boardmap;
+        this.address = address;
+        this.addressdetail = addressdetail;
+        this.zonenumber = zonenumber;
 
     }
 /*
